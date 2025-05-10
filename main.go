@@ -1,7 +1,18 @@
-package main  
+package main
 
-import "fmt"  
+import (
+	"github.com/BerniceZTT/goadmin/config"
+	"github.com/BerniceZTT/goadmin/routes"
+)
 
-func main(){  
-	fmt.Println("Hello q World!")  
+func main() {
+	// 初始化数据库
+	config.ConnectDB()
+	config.Migrate()
+
+	// 设置路由
+	r := routes.SetupRouter()
+
+	// 启动服务
+	r.Run(":8080")
 }
